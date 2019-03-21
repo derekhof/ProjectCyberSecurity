@@ -1,7 +1,7 @@
 # import voor de config lader
 import json
 
-# Functions reads a config file and stores values in global var
+# Functions reads a config file and returns object or string
 def loadIniConfig():
 
     try:
