@@ -14,7 +14,7 @@ def loadIniConfig():
 
         return "FAILED"
 
-
+# Functions prints keywords
 def showKeywords(*keywords):
     for keyword in keywords:
         print("\n" + keyword)
