@@ -42,15 +42,15 @@ class SinglePageScraper:
                 for comment in comments:
 
                     for keyword in self.keywords:
+
+                        # temp test
+                        print(comment)
+                        print("===========")
+                        comment.extract()
                         if keyword in comment:
 
                             # add positive match to results
                             positive_keywords.append(keyword)
-
-                            # temp test
-                            # print(comment)
-                            # print("===========")
-                            # comment.extract()
 
 
                 # remove duplicatie keyword matches
@@ -91,21 +91,63 @@ class SinglePageScraper:
 
 
 
-class loadIniConfig:
+class IniConfig:
 
     def __init__(self):
         try:
             # read config file
             with open('config.json', 'r') as f:
-                config = json.load(f)
-                self.string_finding_part1 = config["DEFAULT_FINDING_STRING_PART_1"]
-                self.string_finding_part2 = config["DEFAULT_FINDING_STRING_PART_2"]
-                self.keywords = config["KEYWORDS"]
+                self.config = json.load(f)
+                self.string_finding_part1 = self.config["DEFAULT_FINDING_STRING_PART_1"]
+                self.string_finding_part2 = self.config["DEFAULT_FINDING_STRING_PART_2"]
+                self.keywords = self.config["KEYWORDS"]
                 self.status = "SUCCEED"
         except:
 
             self.status = "FAILED"
 
 
+    def addKeyword(self):
+
+        doubleKeyword = False
+        newKeyword = input("Add a new keyword: ")
+
+        # Check if keyword already exist
+        for keyword in self.keywords:
+            if keyword == newKeyword:
+                print("Keyword already exists")
+                doubleKeyword = True
+
+        # only add keyword if it is does already exists
+        if doubleKeyword == False:
+                self.keywords.append(newKeyword)
+                self.config["KEYWORDS"] = self.keywords
+
+                with open('config.json', 'w') as f:
+                    json.dump(self.config, f)
 
 
+
+    def deleteKeyword(self):
+
+        KeywordExists = False
+        deleteKeyword = input("Which keyword do you want to delete:")
+
+        # Check if keyword already exist
+        for keyword in self.keywords:
+            if keyword == deleteKeyword:
+
+                KeywordExists = True
+
+        # only add keyword if it is does already exists
+        if KeywordExists == True:
+                self.keywords.remove(deleteKeyword)
+                self.config["KEYWORDS"] = self.keywords
+
+                with open('config.json', 'w') as f:
+                    json.dump(self.config, f)
+
+                print("Keyword deleted")
+
+        else:
+            print("Keyword does not exists")
