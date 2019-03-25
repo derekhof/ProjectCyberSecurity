@@ -2,7 +2,7 @@ from GrapyClasses import *
 
 
 # Get init config
-initConfig = loadIniConfig()
+initConfig = IniConfig()
 
 
 if(initConfig.status != "FAILED"):
@@ -16,9 +16,11 @@ if(initConfig.status != "FAILED"):
         print(30 * "-", "MENU", 30 * "-")
         print("1. Set URL")
         print("2. Show URL")
-        print("3. Show Keywords")
-        print("4. Run SinglePageScraper")
-        print("5. Exit")
+        print("3. Add a new keyword")
+        print("4. Show keywords")
+        print("5. Delete keyword")
+        print("6. Run SinglePageScraper")
+        print("7. Exit")
         print(67 * "-")
 
 
@@ -33,11 +35,15 @@ if(initConfig.status != "FAILED"):
         elif choice == 2:
             singePageScraper.showURL()
         elif choice == 3:
-            singePageScraper.showKeywords()
+            initConfig.addKeyword()
         elif choice == 4:
-            singePageScraper.runSinglePageScraper()
+            singePageScraper.showKeywords()
         elif choice == 5:
-            print ("Menu 5 has been selected")
+            initConfig.deleteKeyword()
+        elif choice == 6:
+            singePageScraper.runSinglePageScraper()
+        elif choice == 7:
+            print ("so long, gay boy")
             ## You can add your code or functions here
             loop = False  # This will make the while loop to end as not value of loop is set to False
         else:
