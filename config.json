@@ -1,7 +1,10 @@
 {
-
-  "FILE_EXCHANGE_PATH": "...",
-  "KEYWORDS":[ "Manager", "Google", "test" ],
-  "DEFAULT_FINDING_STRING_PART_1" : "At the url: ",
-  "DEFAULT_FINDING_STRING_PART_2" : ", positive matches are found between the comments and following keywords: "
+  "FILE_EXCHANGE_PATH": "findings",
+  "FILE_EXCHANGE_NAME": "FindingsName",
+  "KEYWORDS": [
+    "Manager",
+    "Google"
+  ],
+  "DEFAULT_FINDING_STRING_PART_1": "At the url: ",
+  "DEFAULT_FINDING_STRING_PART_2": ", positive matches are found between the comments and following keywords: "
 }
