@@ -1,8 +1,8 @@
 # imports for de functie SinglePageScraper
 import requests
-from GeneralFunctions import *
 from bs4 import BeautifulSoup
 from bs4 import Comment
+import json
 
 
 class SinglePageScraper:
@@ -12,6 +12,7 @@ class SinglePageScraper:
         self.string_finding_part1 = string_finding_part_1
         self.string_finding_part2 = string_finding_part_2
         self.url = None
+
 
 
     def setUrl(self):
@@ -75,7 +76,9 @@ class SinglePageScraper:
 
                 # return results
                 if counter > 0:
+                    self.finding = Finding(self.url, self.keywords)
                     print( self.string_finding_part1 + self.url +  self.string_finding_part2 + string_positive_keywords)
+
                 else:
                     print("NO MATCHES")
 
@@ -88,6 +91,37 @@ class SinglePageScraper:
     def showURL(self):
         return print(self.url)
 
+    def writeToFileExchange(self, path, fileName):
+
+        try:
+
+            filePathNameWExt = './' + path + '/' + fileName + '.json'
+            with open(filePathNameWExt, 'w') as fp:
+                json.dump(self.finding.resultToDict(), fp)
+
+                print("Finding are succesfully exported")
+
+        except:
+            print("There are no findings")
+
+
+
+
+
+class Finding:
+    def __init__(self, url, keywords):
+        self.url = url
+        self.keywords = keywords
+        self.dict = None
+
+
+    def resultToDict(self):
+        self.dict = {}
+        self.dict["URL"] = self.url
+        self.dict['Keywords'] = self.keywords
+
+        return self.dict
+
 
 
 
@@ -98,6 +132,8 @@ class IniConfig:
             # read config file
             with open('config.json', 'r') as f:
                 self.config = json.load(f)
+                self.exchange_path = self.config["FILE_EXCHANGE_PATH"]
+                self.exchange_name = self.config["FILE_EXCHANGE_NAME"]
                 self.string_finding_part1 = self.config["DEFAULT_FINDING_STRING_PART_1"]
                 self.string_finding_part2 = self.config["DEFAULT_FINDING_STRING_PART_2"]
                 self.keywords = self.config["KEYWORDS"]
