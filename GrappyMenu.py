@@ -20,7 +20,8 @@ if(initConfig.status != "FAILED"):
         print("4. Show keywords")
         print("5. Delete keyword")
         print("6. Run SinglePageScraper")
-        print("7. Exit")
+        print("7. Export findings")
+        print("8. Exit")
         print(67 * "-")
 
 
@@ -43,6 +44,8 @@ if(initConfig.status != "FAILED"):
         elif choice == 6:
             singePageScraper.runSinglePageScraper()
         elif choice == 7:
+            singePageScraper.writeToFileExchange(initConfig.exchange_path, initConfig.exchange_path)
+        elif choice == 8:
             print ("so long, gay boy")
             ## You can add your code or functions here
             loop = False  # This will make the while loop to end as not value of loop is set to False
