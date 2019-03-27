@@ -9,7 +9,7 @@ if(initConfig.status != "FAILED"):
 
     # initialize SinglePageScraper
     singePageScraper = SinglePageScraper(initConfig.keywords, initConfig.string_finding_part1, initConfig.string_finding_part2)
-
+    crawler = Crawler()
 
     ## Main menu Grappy
     def print_menu():  ## Your menu design here
@@ -21,7 +21,8 @@ if(initConfig.status != "FAILED"):
         print("5. Delete keyword")
         print("6. Run SinglePageScraper")
         print("7. Export findings")
-        print("8. Exit")
+        print("8. Run Crawler")
+        print("9. Exit")
         print(67 * "-")
 
 
@@ -32,9 +33,9 @@ if(initConfig.status != "FAILED"):
         choice = int(input("Enter your choice [1-5]: "))
 
         if choice == 1:
-            singePageScraper.setUrl()
+            initConfig.setUrl()
         elif choice == 2:
-            singePageScraper.showURL()
+            initConfig.showURL()
         elif choice == 3:
             initConfig.addKeyword()
         elif choice == 4:
@@ -42,10 +43,12 @@ if(initConfig.status != "FAILED"):
         elif choice == 5:
             initConfig.deleteKeyword()
         elif choice == 6:
-            singePageScraper.runSinglePageScraper()
+            singePageScraper.runSinglePageScraper(initConfig.url)
         elif choice == 7:
-            singePageScraper.writeToFileExchange(initConfig.exchange_path, initConfig.exchange_path)
+            singePageScraper.writeToFileExchange(initConfig.exchange_path, initConfig.exchange_name)
         elif choice == 8:
+            crawler.runCrawler(initConfig.url, initConfig)
+        elif choice == 9:
             print ("so long, gay boy")
             ## You can add your code or functions here
             loop = False  # This will make the while loop to end as not value of loop is set to False
