@@ -1,10 +1,24 @@
 {
   "FILE_EXCHANGE_PATH": "findings",
   "FILE_EXCHANGE_NAME": "FindingsName",
+  "DEFAULT_URL": "https://dwg.nl",
   "KEYWORDS": [
-    "Manager",
-    "Google"
+    "Password",
+    "password",
+    "wachtwoord",
+    "Wachtwoord",
+    "Username",
+    "username",
+    "gebruikersnaam",
+    "Gebruikersnaam",
+    "Token",
+    "token",
+    "Key",
+    "key",
+    "Google",
+    "Manager"
   ],
   "DEFAULT_FINDING_STRING_PART_1": "At the url: ",
   "DEFAULT_FINDING_STRING_PART_2": ", positive matches are found between the comments and following keywords: "
 }
+
