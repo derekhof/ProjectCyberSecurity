@@ -75,18 +75,15 @@ class SinglePageScraper:
                 print("The URL is not valid or not set! set a valid URL. Use the following structure: http(s)://xxxx.xx ")
 
 
-def writeToFileExchange(self, path, fileName):
-    try:
+    def writeToFileExchange(self, path, fileName):
+        try:
+            filePathNameWExt = './' + path + '/' + fileName + '.json'
+            with open(filePathNameWExt, 'w') as fp:
+                json.dump(self.finding.resultToDict(), fp)
+                print("Finding are succesfully exported")
+        except:
+                print("There are no findings")
 
-        filePathNameWExt = './' + path + '/' + fileName + '.json'
-        with open(filePathNameWExt, 'w') as fp:
-
-            json.dump(self.finding.resultToDict(), fp)
-
-            print("Finding are succesfully exported")
-
-    except:
-        print("There are no findings")
 
 ####################################################
 ############ Findings handler class ################
