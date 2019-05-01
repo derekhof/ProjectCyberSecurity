@@ -13,8 +13,10 @@ class SinglePageScraper:
         self.string_finding_part1 = string_finding_part_1
         self.string_finding_part2 = string_finding_part_2
 
-
+    def showKeywords(self):
+        print(self.keywords)
     # The function scrapes a specific url and checks if there is a match with the defined keywords
+
     def runSinglePageScraper(self, url):
 
         try:
