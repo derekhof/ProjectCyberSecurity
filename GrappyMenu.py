@@ -8,7 +8,7 @@ initConfig = IniConfig()
 if(initConfig.status != "FAILED"):
 
     # initialize SinglePageScraper
-    singePageScraper = SinglePageScraper(initConfig.keywords, initConfig.string_finding_part1, initConfig.string_finding_part2)
+    singlePageScraper = SinglePageScraper(initConfig.keywords, initConfig.string_finding_part1, initConfig.string_finding_part2)
     crawler = Crawler()
 
     ## Main menu Grappy
@@ -39,13 +39,13 @@ if(initConfig.status != "FAILED"):
         elif choice == 3:
             initConfig.addKeyword()
         elif choice == 4:
-            singePageScraper.showKeywords()
+            singlePageScraper.showKeywords()
         elif choice == 5:
             initConfig.deleteKeyword()
         elif choice == 6:
-            singePageScraper.runSinglePageScraper(initConfig.url)
+            singlePageScraper.runSinglePageScraper(initConfig.url)
         elif choice == 7:
-            singePageScraper.writeToFileExchange(initConfig.exchange_path, initConfig.exchange_name)
+            singlePageScraper.writeToFileExchange(initConfig.exchange_path, initConfig.exchange_name)
         elif choice == 8:
             crawler.runCrawler(initConfig.url, initConfig)
         elif choice == 9:

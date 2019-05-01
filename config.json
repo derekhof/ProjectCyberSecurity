@@ -16,7 +16,9 @@
     "Key",
     "key",
     "Google",
-    "Manager"
+    "Manager",
+    "TODO",
+    "FIXME"
   ],
   "DEFAULT_FINDING_STRING_PART_1": "At the url: ",
   "DEFAULT_FINDING_STRING_PART_2": ", positive matches are found between the comments and following keywords: "
