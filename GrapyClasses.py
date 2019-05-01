@@ -15,8 +15,8 @@ class SinglePageScraper:
 
     def showKeywords(self):
         print(self.keywords)
-    # The function scrapes a specific url and checks if there is a match with the defined keywords
 
+    # The function scrapes a specific url and checks if there is a match with the defined keywords
     def runSinglePageScraper(self, url):
 
         try:
@@ -60,9 +60,8 @@ class SinglePageScraper:
 
                 # return results
                 if counter > 0:
-                    self.finding = Finding(url, self.keywords)
+                    self.finding = Finding(url, string_positive_keywords)
                     print(self.string_finding_part1 + url + self.string_finding_part2 + string_positive_keywords)
-
                     return self.finding
 
                 else:
@@ -77,6 +76,7 @@ class SinglePageScraper:
 
     def writeToFileExchange(self, path, fileName):
         try:
+            print(self.finding.resultToDict())
             filePathNameWExt = './' + path + '/' + fileName + '.json'
             with open(filePathNameWExt, 'w') as fp:
                 json.dump(self.finding.resultToDict(), fp)
