@@ -3,7 +3,8 @@ import requests
 from multiprocessing import Pool
 from bs4 import BeautifulSoup
 from bs4 import Comment
-import json
+import json, re
+from time import gmtime, strftime
 
 
 class SinglePageScraper:
@@ -77,7 +78,7 @@ class SinglePageScraper:
     def writeToFileExchange(self, path, fileName):
         try:
             print(self.finding.resultToDict())
-            filePathNameWExt = './' + path + '/' + fileName + '.json'
+            filePathNameWExt = './' + path + '/' + re.sub("[.:/(http|https)]", "", fileName)+ strftime("-%Y%m%d%H%M", gmtime()) + '.json'
             with open(filePathNameWExt, 'w') as fp:
                 json.dump(self.finding.resultToDict(), fp)
                 print("Finding are succesfully exported")

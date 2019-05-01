@@ -45,7 +45,7 @@ if(initConfig.status != "FAILED"):
         elif choice == 6:
             singlePageScraper.runSinglePageScraper(initConfig.url)
         elif choice == 7:
-            singlePageScraper.writeToFileExchange(initConfig.exchange_path, initConfig.exchange_name)
+            singlePageScraper.writeToFileExchange(initConfig.exchange_path, initConfig.url)
         elif choice == 8:
             crawler.runCrawler(initConfig.url, initConfig)
         elif choice == 9:
