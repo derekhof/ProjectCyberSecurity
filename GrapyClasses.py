@@ -3,8 +3,8 @@ import requests
 from multiprocessing import Pool
 from bs4 import BeautifulSoup
 from bs4 import Comment
-import json, re
-from time import gmtime, strftime
+import datetime
+import json
 
 
 class SinglePageScraper:
@@ -14,8 +14,6 @@ class SinglePageScraper:
         self.string_finding_part1 = string_finding_part_1
         self.string_finding_part2 = string_finding_part_2
 
-    def showKeywords(self):
-        print(self.keywords)
 
     # The function scrapes a specific url and checks if there is a match with the defined keywords
     def runSinglePageScraper(self, url):
@@ -63,6 +61,7 @@ class SinglePageScraper:
                 if counter > 0:
                     self.finding = Finding(url, string_positive_keywords)
                     print(self.string_finding_part1 + url + self.string_finding_part2 + string_positive_keywords)
+
                     return self.finding
 
                 else:
@@ -75,33 +74,62 @@ class SinglePageScraper:
                 print("The URL is not valid or not set! set a valid URL. Use the following structure: http(s)://xxxx.xx ")
 
 
-    def writeToFileExchange(self, path, fileName):
+    # Function writes a single page scraper finding to a json file. The filename and filepath can be changed in the config.json file
+    # Function first retreives existing exported findings. If the file does not contain findings, a new findings json array will me created.
+
+    def writeToFileExchange(self, path, fileName, singlePageScraperFinding):
+
+
+        filePathNameWExt = './' + path + '/' + fileName + '.json'
+
+        # retrieve existing test results
         try:
-            print(self.finding.resultToDict())
-            filePathNameWExt = './' + path + '/' + re.sub("[.:/(http|https)]", "", fileName)+ strftime("-%Y%m%d%H%M", gmtime()) + '.json'
-            with open(filePathNameWExt, 'w') as fp:
-                json.dump(self.finding.resultToDict(), fp)
-                print("Finding are succesfully exported")
+            # read config file
+            with open(filePathNameWExt, 'r') as f:
+
+            # deserialize object and check is if the file contains json objects
+                try:
+                    results = json.load(f)
+                    fileIsEmpty = False
+
+                except:
+                    fileIsEmpty = True
+
+                fileRetrieved = True
         except:
-                print("There are no findings")
+
+            fileRetrieved = False
 
 
-####################################################
-############ Findings handler class ################
-####################################################
 
-class Finding:
-    def __init__(self, url, keywords):
-        self.url = url
-        self.keywords = keywords
-        self.dict = None
+        # check if file has successfully been retrieved
+        if fileRetrieved:
 
-    def resultToDict(self):
-        self.dict = {}
-        self.dict["URL"] = self.url
-        self.dict['Keywords'] = self.keywords
+            # check if the file is empty
+            if fileIsEmpty:
 
-        return self.dict
+                # create a new json array
+                results = []
+
+
+            # append new finding to json array
+            results.append(singlePageScraperFinding.resultToJson())
+
+            # write new results json array to file
+            try:
+
+                 with open(filePathNameWExt, 'w') as fp:
+
+                     json.dump(results, fp)
+
+                     print("Finding are succesfully exported")
+
+            except:
+                    print("Error during file write action")
+
+        else:
+                print("Error during file retrieve action")
+
 
 
 # Configuration handler class
@@ -243,9 +271,49 @@ class Crawler:
             if finding != None:
                 findings.append(finding)
 
+        return findings
 
 
-        for finding in findings:
-            print(finding.resultToDict())
+
+
+####################################################
+############ Findings handler class ################
+####################################################
+
+class Finding:
+    def __init__(self, url, keywords):
+
+        self.date_time = datetime.datetime.now()
+        self.url = url
+        self.keywords = keywords
+        self.dict = None
+        self.findings = []
+
+
+    def resultToJson(self):
+        self.json = {}
+        self.json["KEYWORDS"] = self.keywords
+        self.json["FINDING"] = self.url
+        self.json["DATETIME"] = str(self.date_time)
+
+        return self.json
+
+
+class Export:
+
+    def __init__(self):
+
+        self.findings = []
+
+
+    def createReport(self, findings):
+        self.findings = findings
+
+
+        for finding in self.findings:
+            print(finding.resultToJson())
+
+
+
 
 
