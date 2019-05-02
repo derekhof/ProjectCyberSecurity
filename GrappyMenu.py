@@ -3,13 +3,17 @@ from GrapyClasses import *
 
 # Get init config
 initConfig = IniConfig()
+crawler_findings = []
 
 
 if(initConfig.status != "FAILED"):
 
-    # initialize SinglePageScraper
-    singlePageScraper = SinglePageScraper(initConfig.keywords, initConfig.string_finding_part1, initConfig.string_finding_part2)
+    # initialize SinglePageScraper variables
+    singePageScraper = SinglePageScraper(initConfig.keywords, initConfig.string_finding_part1, initConfig.string_finding_part2)
     crawler = Crawler()
+    export = Export()
+    singlePageScraperFinding = None
+
 
     ## Main menu Grappy
     def print_menu():  ## Your menu design here
@@ -20,9 +24,10 @@ if(initConfig.status != "FAILED"):
         print("4. Show keywords")
         print("5. Delete keyword")
         print("6. Run SinglePageScraper")
-        print("7. Export findings")
+        print("7. Export singlePageScraper finding")
         print("8. Run Crawler")
-        print("9. Exit")
+        print("9. Export crawler findings")
+        print("10. Exit")
         print(67 * "-")
 
 
@@ -39,16 +44,23 @@ if(initConfig.status != "FAILED"):
         elif choice == 3:
             initConfig.addKeyword()
         elif choice == 4:
-            singlePageScraper.showKeywords()
+            singePageScraper.showKeywords()
         elif choice == 5:
             initConfig.deleteKeyword()
         elif choice == 6:
-            singlePageScraper.runSinglePageScraper(initConfig.url)
+            singlePageScraperFinding = singePageScraper.runSinglePageScraper(initConfig.url)
         elif choice == 7:
-            singlePageScraper.writeToFileExchange(initConfig.exchange_path, initConfig.url)
+            if singlePageScraperFinding == None:
+                print("There a no findings to export, first run the SinglePageScraper")
+            else:
+                singePageScraper.writeToFileExchange(initConfig.exchange_path, initConfig.exchange_name, singlePageScraperFinding)
+                # delete finding after export
+                singlePageScraperFinding = None
         elif choice == 8:
-            crawler.runCrawler(initConfig.url, initConfig)
+            crawler_findings = crawler.runCrawler(initConfig.url, initConfig)
         elif choice == 9:
+            export.createReport(crawler_findings)
+        elif choice == 10:
             print ("so long, gay boy")
             ## You can add your code or functions here
             loop = False  # This will make the while loop to end as not value of loop is set to False
