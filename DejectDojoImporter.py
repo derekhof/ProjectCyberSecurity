@@ -71,4 +71,3 @@ finding = dd.create_finding("Crawler test", "Test finding", "Low", 1,start_date.
 
 
 
-print("Listing the new findings for this build")
