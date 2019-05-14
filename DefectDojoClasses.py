@@ -56,16 +56,22 @@ class defectDojoInterface:
 
     def getExistingEngagements(self, product_id, product_name):
 
-        engagement = self.dd.list_engagements(product_in=product_id, name_contains="Intial " + product_name + " Engagement")
-
-        if engagement.count() > 0:
-            for engagement in engagement.data["objects"]:
-                print(engagement['name'] + " - ID = " + str(engagement['id']))
-
+        # check if there is a connection
+        if self.dd != None:
+            engagement = self.dd.list_engagements(product_in=product_id, name_contains="Intial " + product_name + " Engagement")
+            return engagement.data["objects"]
 
 
+    def checkEngagementID(self, engagement_id):
+
+         product = self.dd.get_engagement(engagement_id)
+         if product.message == "Object id does not exist.":
+             return False
+
+         return True
 
 
-
-
-
+    def getEngagementName(self, engagement_id):
+        product = self.dd.get_engagement(engagement_id)
+        json_str = json.loads(product.data_json())
+        return json_str["name"]

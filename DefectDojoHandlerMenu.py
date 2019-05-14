@@ -12,9 +12,15 @@ ddInterface = defectDojoInterface(connection_params)
 
 # Function prints all the existing products
 def printProducts(products):
-    print("Defect Dojo Products: ")
+    print("DefectDojo Products: ")
     for product in products:
         print(product['name'] + " - " + "(ID = " + str(product['id']) + ")")
+        print("******************")
+
+def printEngagements(engagements):
+    print("Product engagements: ")
+    for engagement in engagements:
+        print(engagement['name'] + " - " + "(ID = " + str(engagement['id']) + ")")
         print("******************")
 
 def selectAndValidatePoductID():
@@ -29,40 +35,73 @@ def selectAndValidatePoductID():
             return None
     except:
         print("Only use numbers are allowed")
+        return None
 
-
+def selectAndValidateEngagementID():
+    try:
+        engagement_id = int(input("Engagement ID = ?"))
+        if ddInterface.checkEngagementID(engagement_id):
+            print("selected engagement: " + ddInterface.getEngagementName(engagement_id))
+            return engagement_id
+        else:
+            print("Engagement ID does not exist")
+            return None
+    except:
+        print("Only use numbers are allowed")
+        return None
 
 ## Main menu Grappy
-def print_menu(oonnection, product_id):  ## Your menu design here
-    print(30 * "-", "MENU", 30 * "-")
-    print("1. Initiate connection with Defect Dojo")
-    if connection:
+def print_menu(step):  ## Your menu design here
+    print(30 * "-", "DEFECTDOJO IMPORTER CONFIGURATION MENU", 30 * "-")
+
+    if step == 1:
+        print("1. Initiate connection with Defect Dojo")
+    elif step == 2:
         print("2. Show existing product")
         print("3. Select a product")
+    elif step == 3:
+        print("4. Show engagements")
+        print("5. Select a engagement")
+    elif step == 4:
+        print("6. Show crawler test results")
+        print("7. Select crawler test results")
 
-        if product_id != None:
-            print("4. Show engagements")
-
+    print("9. Restart configuration")
     print("10. Exit")
     print(67 * "-")
 
 # init loop state
 loop = True
-connection = False
+
 product_id = None
+step = 1
 
 while loop:  ## While loop which will keep going until loop = False
-    print_menu(connection, product_id)  ## Displays menu
+    print_menu(step)  ## Displays menu
     choice = int(input("Enter your choice [1-5]: "))
 
-    if choice == 1:
-        connection = ddInterface.setupConnection()
-    elif choice == 2:
+    if choice == 1 and step == 1:
+        # initialize connection and go to step 2 if connection is succeeded
+        if ddInterface.setupConnection():
+            step = 2
+    elif choice == 2 and step == 2:
         printProducts(ddInterface.getExistingProducts())
-    elif choice == 3:
+    elif choice == 3 and step == 2:
+        # select a product and validate product id. If successfull to step 3
         product_id = selectAndValidatePoductID()
-    elif choice == 4:
-        engagement_id = ddInterface.getExistingEngagements(product_id, ddInterface.getProductName(product_id))
+        if product_id != None:
+            step = 3
+    elif choice == 4 and step == 3:
+        printEngagements(ddInterface.getExistingEngagements(product_id, ddInterface.getProductName(product_id)))
+    elif choice == 5 and step == 3:
+        # select a engagement and validate product id. If successfull to step 3
+        engagement_id = selectAndValidateEngagementID()
+        if engagement_id != None:
+            step = 4
+    elif choice == 9:
+        product_id = None
+        engagement_id = None
+        step = 1
     elif choice == 10:
         loop = False
 
