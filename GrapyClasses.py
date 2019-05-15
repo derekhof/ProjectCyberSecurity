@@ -4,7 +4,9 @@ from multiprocessing import Pool
 from bs4 import BeautifulSoup
 from bs4 import Comment
 import datetime
-import json
+import json, re
+
+from time import gmtime, strftime
 
 
 class SinglePageScraper:
@@ -299,19 +301,45 @@ class Finding:
         return self.json
 
 
-class Export:
+class CrawlerResult:
 
     def __init__(self):
-
-        self.findings = []
+        self.findings = None
+        self.test_name = "Eerste test"
+        self.date_time = datetime.datetime.now()
 
 
     def createReport(self, findings):
+
         self.findings = findings
 
-
+        finding_list = []
         for finding in self.findings:
-            print(finding.resultToJson())
+
+            finding_list.append(finding.resultToJson())
+
+
+        self.findings = findings
+        self.json = {}
+        self.json["NAME"] = self.test_name
+        self.json["FINDING"] = finding_list
+        self.json["DATETIME"] = str(self.date_time)
+
+    def writeToFileExchange(self, url):
+        try:
+            filePathNameWExt =  "findings/" + url[8:] + str(strftime("-%Y%m%d%H%M")) + ".json"
+            #filePathNameWExt = '/' + "findings" + '/' + fileName + '.json'
+            #filePathNameWExt = './' + path + '/' + re.sub("[.:/(http|https)]", "", fileName) + datetime.strftime(
+              #  "-%Y%m%d%H%M", datetime.gmtime()) + '.json'
+
+            print(filePathNameWExt)
+            with open(filePathNameWExt, 'w') as fp:
+                json.dump(self.json, fp)
+                print("Finding are succesfully exported")
+        except FileNotFoundError:
+            print("Catch all !!")
+
+
 
 
 

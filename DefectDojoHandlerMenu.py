@@ -10,6 +10,9 @@ connection_params.user_id = 1
 # Initialize the connection
 ddInterface = defectDojoInterface(connection_params)
 
+# initialize crawler result object
+gcInterface = grappyCrawlerInterface()
+
 # Function prints all the existing products
 def printProducts(products):
     print("DefectDojo Products: ")
@@ -22,6 +25,14 @@ def printEngagements(engagements):
     for engagement in engagements:
         print(engagement['name'] + " - " + "(ID = " + str(engagement['id']) + ")")
         print("******************")
+
+def printTestResults(test_results):
+    index = 0
+    print("Product engagements: ")
+    for test_result in test_results:
+        print(test_result + " - " + "(ID = " + str(index) + ")")
+        print("******************")
+        index  = index + 1
 
 def selectAndValidatePoductID():
 
@@ -49,6 +60,21 @@ def selectAndValidateEngagementID():
     except:
         print("Only use numbers are allowed")
         return None
+
+
+def selectAndValidateTestResultID(list_test_result_files):
+    try:
+        test_result_id = int(input("Test result ID = ?"))
+        if test_result_id <= len(list_test_result_files):
+            print("selected test results: " + list_test_result_files[test_result_id])
+            return list_test_result_files[test_result_id]
+        else:
+            print("Test result ID does not exist")
+            return None
+    except:
+        print("Only use numbers are allowed")
+        return None
+
 
 ## Main menu Grappy
 def print_menu(step):  ## Your menu design here
@@ -98,6 +124,13 @@ while loop:  ## While loop which will keep going until loop = False
         engagement_id = selectAndValidateEngagementID()
         if engagement_id != None:
             step = 4
+    elif choice == 6:
+        printTestResults(gcInterface.getExistingCrawlerResults())
+    elif choice == 7:
+        path_test_result_json_file = selectAndValidateTestResultID(gcInterface.getExistingCrawlerResults())
+    elif choice == 8:
+        gcInterface.getTestResult(path_test_result_json_file)
+        print(gcInterface.status)
     elif choice == 9:
         product_id = None
         engagement_id = None

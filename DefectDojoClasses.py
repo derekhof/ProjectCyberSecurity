@@ -3,7 +3,7 @@ import defectdojo
 import datetime
 import random
 import json
-
+import os
 
 class defectDojoParams:
 
@@ -75,3 +75,34 @@ class defectDojoInterface:
         product = self.dd.get_engagement(engagement_id)
         json_str = json.loads(product.data_json())
         return json_str["name"]
+
+class grappyCrawlerInterface:
+
+    def __init__(self):
+        self.json_test_result = None
+        self.status = None
+
+    def getExistingCrawlerResults(self):
+
+        json_files = []
+        dir = "findings"
+
+        for file in os.listdir(dir):
+            if file.endswith(".json"):
+                json_files.append(dir + "/" + file)
+
+        return json_files
+
+    def getTestResult(self, path_test_result_json_file):
+        try:
+            # read config file
+            with open(path_test_result_json_file, 'r') as f:
+                self.config = json.load(f)
+                self.status = "SUCCEED"
+        except:
+
+            self.status = "FAILED"
+
+
+
+

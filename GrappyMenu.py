@@ -11,7 +11,7 @@ if(initConfig.status != "FAILED"):
     # initialize SinglePageScraper variables
     singePageScraper = SinglePageScraper(initConfig.keywords, initConfig.string_finding_part1, initConfig.string_finding_part2)
     crawler = Crawler()
-    export = Export()
+    crawlerResult = CrawlerResult()
     singlePageScraperFinding = None
 
 
@@ -59,7 +59,8 @@ if(initConfig.status != "FAILED"):
         elif choice == 8:
             crawler_findings = crawler.runCrawler(initConfig.url, initConfig)
         elif choice == 9:
-            export.createReport(crawler_findings)
+            crawlerResult.createReport(crawler_findings)
+            crawlerResult.writeToFileExchange(initConfig.url)
         elif choice == 10:
             print ("so long, gay boy")
             ## You can add your code or functions here
