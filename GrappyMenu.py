@@ -44,7 +44,7 @@ if(initConfig.status != "FAILED"):
         elif choice == 3:
             initConfig.addKeyword()
         elif choice == 4:
-            singePageScraper.showKeywords()
+            initConfig.showKeywords()
         elif choice == 5:
             initConfig.deleteKeyword()
         elif choice == 6:
@@ -59,6 +59,7 @@ if(initConfig.status != "FAILED"):
         elif choice == 8:
             crawler_findings = crawler.runCrawler(initConfig.url, initConfig)
         elif choice == 9:
+            crawlerResult.defineTestName()
             crawlerResult.createReport(crawler_findings)
             crawlerResult.writeToFileExchange(initConfig.url)
         elif choice == 10:

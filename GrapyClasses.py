@@ -200,7 +200,7 @@ class IniConfig:
             self.url = input("Set URL:")
 
     def showKeywords(self):
-            for keyword in self.keywords:
+        for keyword in self.keywords:
                 print("\n" + keyword)
 
     def showURL(self):
@@ -305,8 +305,12 @@ class CrawlerResult:
 
     def __init__(self):
         self.findings = None
-        self.test_name = "Eerste test"
+        self.test_name = None
         self.date_time = datetime.datetime.now()
+
+
+    def defineTestName(self):
+        self.test_name = input("Name of the test = ?")
 
 
     def createReport(self, findings):

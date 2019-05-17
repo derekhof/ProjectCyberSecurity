@@ -13,6 +13,9 @@ ddInterface = defectDojoInterface(connection_params)
 # initialize crawler result object
 gcInterface = grappyCrawlerInterface()
 
+# Initialize Defect Dojo test result object
+ddTestResult = dejectDojoTestResult()
+
 # Function prints all the existing products
 def printProducts(products):
     print("DefectDojo Products: ")
@@ -75,6 +78,14 @@ def selectAndValidateTestResultID(list_test_result_files):
         print("Only use numbers are allowed")
         return None
 
+def exportTestResults():
+    ddTestResult = gcInterface.getTestResult(path_test_result_json_file)
+
+    if gcInterface.status:
+        ddInterface.exportToDefectDojo(ddTestResult)
+
+
+
 
 ## Main menu Grappy
 def print_menu(step):  ## Your menu design here
@@ -91,6 +102,8 @@ def print_menu(step):  ## Your menu design here
     elif step == 4:
         print("6. Show crawler test results")
         print("7. Select crawler test results")
+    elif step == 5:
+        print("8. Export test result to DefectDojo")
 
     print("9. Restart configuration")
     print("10. Exit")
@@ -100,6 +113,8 @@ def print_menu(step):  ## Your menu design here
 loop = True
 
 product_id = None
+path_test_result_json_file = None
+engagement_id = None
 step = 1
 
 while loop:  ## While loop which will keep going until loop = False
@@ -128,9 +143,11 @@ while loop:  ## While loop which will keep going until loop = False
         printTestResults(gcInterface.getExistingCrawlerResults())
     elif choice == 7:
         path_test_result_json_file = selectAndValidateTestResultID(gcInterface.getExistingCrawlerResults())
+        if path_test_result_json_file != None:
+            step = 5
+
     elif choice == 8:
-        gcInterface.getTestResult(path_test_result_json_file)
-        print(gcInterface.status)
+        exportTestResults()
     elif choice == 9:
         product_id = None
         engagement_id = None
