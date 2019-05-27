@@ -16,14 +16,17 @@ if(initConfig.status != "FAILED"):
     crawler = Crawler()
     crawlerResult = CrawlerResult()
     singlePageScraperFinding = None
-if (sys.argv[1] == 'auto'):
-    crawler_findings = crawler.runCrawler(initConfig.url, initConfig)
-    crawlerResult.defineTestName()
-    crawlerResult.createReport(crawler_findings)
-    crawlerResult.writeToFileExchange(initConfig.url)
+try:
+    if (sys.argv[1] == 'auto'):
+        crawler_findings = crawler.runCrawler(initConfig.url, initConfig)
+        crawlerResult.defineTestName()
+        crawlerResult.createReport(crawler_findings)
+        crawlerResult.writeToFileExchange(initConfig.url)
     # delete results
-    crawlerResult = None
-    exit(1)
+        crawlerResult = None
+        exit(1)
+except:
+    pass
 
 
     ## Main menu Grappy
