@@ -92,7 +92,7 @@ def exportTestResults():
 def print_menu(step):  ## Your menu design here
     f = Figlet(font='isometric2')
     print(f.renderText('Grappy'))
-    print(30 * "-", "DEFECTDOJO IMPORTER CONFIGURATION MENU", 30 * "-")
+    print(13 * "-", "DEFECTDOJO IMPORTER CONFIGURATION MENU", 14 * "-")
 
     if step == 1:
         print("\033[31m" + "1. Initiate connection with Defect Dojo")

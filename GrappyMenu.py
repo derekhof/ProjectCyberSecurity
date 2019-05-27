@@ -6,7 +6,6 @@ from pyfiglet import Figlet
 initConfig = IniConfig()
 crawler_findings = []
 
-
 if(initConfig.status != "FAILED"):
 
     # initialize SinglePageScraper variables
@@ -24,8 +23,8 @@ if(initConfig.status != "FAILED"):
         print(30 * "-", "MENU", 30 * "-")
         print("\033[31m" + "1. Set URL")
         print("\033[31m" + "2. Show URL")
-        print("\033[31m" + "3. Add a new keyword")
-        print("\033[31m" + "4. Show keywords")
+        print("\033[31m" + "3. Show keywords")
+        print("\033[31m" + "4. Add a new keyword")
         print("\033[31m" + "5. Delete keyword")
         print("\033[31m" + "6. Run SinglePageScraper")
         print("\033[31m" + "7. Export singlePageScraper finding")
@@ -46,10 +45,12 @@ if(initConfig.status != "FAILED"):
         elif choice == 2:
             initConfig.showURL()
         elif choice == 3:
-            initConfig.addKeyword()
-        elif choice == 4:
             initConfig.showKeywords()
+        elif choice == 4:
+            initConfig.addKeyword()
         elif choice == 5:
+            initConfig.showKeywords()
+            print(" ")
             initConfig.deleteKeyword()
         elif choice == 6:
             singlePageScraperFinding = singePageScraper.runSinglePageScraper(initConfig.url)
@@ -67,7 +68,7 @@ if(initConfig.status != "FAILED"):
             crawlerResult.createReport(crawler_findings)
             crawlerResult.writeToFileExchange(initConfig.url)
         elif choice == 10:
-            print ("so long, and thanx for all the fish!")
+            print ("So long, and thanks for the fish!")
             ## You can add your code or functions here
             loop = False  # This will make the while loop to end as not value of loop is set to False
         else:
