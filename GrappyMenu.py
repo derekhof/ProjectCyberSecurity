@@ -26,7 +26,7 @@ try:
         crawlerResult = None
         exit(1)
 except:
-    pass
+    exit(1)
 
 
     ## Main menu Grappy
