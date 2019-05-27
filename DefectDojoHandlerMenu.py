@@ -1,4 +1,5 @@
 from  DefectDojoClasses import *
+from pyfiglet import Figlet
 
 # Set connection params for Deject Dojo (temp -> function for reading it from config file)
 connection_params = defectDojoParams()
@@ -89,24 +90,26 @@ def exportTestResults():
 
 ## Main menu Grappy
 def print_menu(step):  ## Your menu design here
+    f = Figlet(font='isometric2')
+    print(f.renderText('Grappy'))
     print(30 * "-", "DEFECTDOJO IMPORTER CONFIGURATION MENU", 30 * "-")
 
     if step == 1:
-        print("1. Initiate connection with Defect Dojo")
+        print("\033[31m" + "1. Initiate connection with Defect Dojo")
     elif step == 2:
-        print("2. Show existing product")
-        print("3. Select a product")
+        print("\033[31m" + "2. Show existing product")
+        print("\033[31m" + "3. Select a product")
     elif step == 3:
-        print("4. Show engagements")
-        print("5. Select a engagement")
+        print("\033[31m" + "4. Show engagements")
+        print("\033[31m" + "5. Select a engagement")
     elif step == 4:
-        print("6. Show crawler test results")
-        print("7. Select crawler test results")
+        print("\033[31m" + "6. Show crawler test results")
+        print("\033[31m" + "7. Select crawler test results")
     elif step == 5:
-        print("8. Export test result to DefectDojo")
+        print("\033[31m" + "8. Export test result to DefectDojo")
 
-    print("9. Restart configuration")
-    print("10. Exit")
+    print("\033[31m" + "9. Restart configuration")
+    print("\033[31m" + "10.Exit")
     print(67 * "-")
 
 # init loop state
@@ -119,7 +122,7 @@ step = 1
 
 while loop:  ## While loop which will keep going until loop = False
     print_menu(step)  ## Displays menu
-    choice = int(input("Enter your choice [1-5]: "))
+    choice = int(input("\033[37mEnter your choice : "))
 
     if choice == 1 and step == 1:
         # initialize connection and go to step 2 if connection is succeeded

@@ -5,6 +5,9 @@ from bs4 import BeautifulSoup
 from bs4 import Comment
 import datetime
 import json, re
+import os
+
+
 
 from time import gmtime, strftime
 
@@ -199,12 +202,14 @@ class IniConfig:
     def setUrl(self):
             self.url = input("Set URL:")
 
+
     def showKeywords(self):
         for keyword in self.keywords:
-                print("\n" + keyword)
+            print("|" + keyword + "|")
+
 
     def showURL(self):
-        return print(self.url)
+        return print("\033[37m" + "The following url is set:" + self.url)
 
 
 class Crawler:

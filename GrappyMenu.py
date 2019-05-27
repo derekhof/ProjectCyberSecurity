@@ -1,4 +1,5 @@
 from GrapyClasses import *
+from pyfiglet import Figlet
 
 
 # Get init config
@@ -17,25 +18,28 @@ if(initConfig.status != "FAILED"):
 
     ## Main menu Grappy
     def print_menu():  ## Your menu design here
+
+        f = Figlet(font='isometric2')
+        print(f.renderText('Grappy'))
         print(30 * "-", "MENU", 30 * "-")
-        print("1. Set URL")
-        print("2. Show URL")
-        print("3. Add a new keyword")
-        print("4. Show keywords")
-        print("5. Delete keyword")
-        print("6. Run SinglePageScraper")
-        print("7. Export singlePageScraper finding")
-        print("8. Run Crawler")
-        print("9. Export crawler findings")
-        print("10. Exit")
-        print(67 * "-")
+        print("\033[31m" + "1. Set URL")
+        print("\033[31m" + "2. Show URL")
+        print("\033[31m" + "3. Add a new keyword")
+        print("\033[31m" + "4. Show keywords")
+        print("\033[31m" + "5. Delete keyword")
+        print("\033[31m" + "6. Run SinglePageScraper")
+        print("\033[31m" + "7. Export singlePageScraper finding")
+        print("\033[31m" + "8. Run Crawler")
+        print("\033[31m" + "9. Export crawler findings")
+        print("\033[31m" + "10.Exit\n")
+        print(67 * "\033[31m-")
 
 
     loop = True
 
     while loop:  ## While loop which will keep going until loop = False
         print_menu()  ## Displays menu
-        choice = int(input("Enter your choice [1-5]: "))
+        choice = int(input("\033[37mEnter your choice: "))
 
         if choice == 1:
             initConfig.setUrl()
