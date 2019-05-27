@@ -64,11 +64,13 @@ if(initConfig.status != "FAILED"):
         elif choice == 8:
             crawler_findings = crawler.runCrawler(initConfig.url, initConfig)
         elif choice == 9:
-            crawlerResult.defineTestName()
-            crawlerResult.createReport(crawler_findings)
-            crawlerResult.writeToFileExchange(initConfig.url)
-            # delete results
-            crawlerResult = None
+
+            if crawlerResult != None:
+                crawlerResult.defineTestName()
+                crawlerResult.createReport(crawler_findings)
+                crawlerResult.writeToFileExchange(initConfig.url)
+                # delete results
+                crawlerResult = None
 
         elif choice == 10:
             print ("So long, and thanks for the fish!")
