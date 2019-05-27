@@ -2,11 +2,8 @@ from  DefectDojoClasses import *
 from pyfiglet import Figlet
 
 # Set connection params for Deject Dojo (temp -> function for reading it from config file)
-connection_params = defectDojoParams()
-connection_params.host = 'http://192.168.241.129:8000'
-connection_params.api_key = '5de86e2ee9d78f16de3b1b8029c1dff903453a46'
-connection_params.user = 'root'
-connection_params.user_id = 1
+init_config = IniConfig()
+connection_params = init_config.getDefectDojoParams()
 
 # Initialize the connection
 ddInterface = defectDojoInterface(connection_params)
@@ -148,7 +145,6 @@ while loop:  ## While loop which will keep going until loop = False
         path_test_result_json_file = selectAndValidateTestResultID(gcInterface.getExistingCrawlerResults())
         if path_test_result_json_file != None:
             step = 5
-
     elif choice == 8:
         exportTestResults()
     elif choice == 9:
