@@ -65,7 +65,9 @@ if(initConfig.status != "FAILED"):
             crawler_findings = crawler.runCrawler(initConfig.url, initConfig)
         elif choice == 9:
 
-            if crawlerResult != None:
+            if crawlerResult == None:
+                print("There a no findings to export, first run the Crawler")
+            else:
                 crawlerResult.defineTestName()
                 crawlerResult.createReport(crawler_findings)
                 crawlerResult.writeToFileExchange(initConfig.url)
