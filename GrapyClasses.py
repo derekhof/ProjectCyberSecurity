@@ -70,7 +70,7 @@ class SinglePageScraper:
                     return self.finding
 
                 else:
-                    print("NO MATCHES")
+                    print(self.string_finding_part1 + url + " NO MATCHES")
 
             else:
                 print("HTTP request failed, HTTP reponse status code: " + str(result.status_code))
@@ -339,10 +339,8 @@ class CrawlerResult:
 
     def writeToFileExchange(self, url):
         try:
-            filePathNameWExt =  "findings/" + url[8:] + str(strftime("-%Y%m%d%H%M")) + ".json"
-            #filePathNameWExt = '/' + "findings" + '/' + fileName + '.json'
-            #filePathNameWExt = './' + path + '/' + re.sub("[.:/(http|https)]", "", fileName) + datetime.strftime(
-              #  "-%Y%m%d%H%M", datetime.gmtime()) + '.json'
+            print('test')
+            filePathNameWExt = "findings/" + re.sub("[.:/(http|https)]", "", url) + str(strftime("-%Y%m%d%H%M")) + ".json"
 
             print(filePathNameWExt)
             with open(filePathNameWExt, 'w') as fp:
