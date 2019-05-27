@@ -70,7 +70,7 @@ class SinglePageScraper:
                     return self.finding
 
                 else:
-                    print("NO MATCHES")
+                    print(self.string_finding_part1 + url + " NO MATCHES")
 
             else:
                 print("HTTP request failed, HTTP reponse status code: " + str(result.status_code))
