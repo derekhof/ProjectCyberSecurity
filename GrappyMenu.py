@@ -67,6 +67,9 @@ if(initConfig.status != "FAILED"):
             crawlerResult.defineTestName()
             crawlerResult.createReport(crawler_findings)
             crawlerResult.writeToFileExchange(initConfig.url)
+            # delete results
+            crawlerResult = None
+
         elif choice == 10:
             print ("So long, and thanks for the fish!")
             ## You can add your code or functions here
