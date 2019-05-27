@@ -67,7 +67,7 @@ if(initConfig.status != "FAILED"):
             crawlerResult.createReport(crawler_findings)
             crawlerResult.writeToFileExchange(initConfig.url)
         elif choice == 10:
-            print ("so long, gay boy")
+            print ("so long, and thanx for all the fish!")
             ## You can add your code or functions here
             loop = False  # This will make the while loop to end as not value of loop is set to False
         else:
