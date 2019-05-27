@@ -6,7 +6,7 @@ import random
 import json
 import os
 
-class defectDojoParams:
+class DefectDojoParams:
 
     def __init__(self):
         self.host = None
@@ -27,6 +27,30 @@ class dejectDojoTestResult:
         self.name = crawler_results["NAME"]
         self.datetime = crawler_results["DATETIME"]
         self.findings = crawler_results["FINDING"]
+
+
+# Configuration handler class
+class IniConfig:
+
+    def __init__(self):
+
+        self. defectDojoParams = DefectDojoParams()
+        try:
+            # read config file
+            with open('config.json', 'r') as f:
+                self.defectDojoParams.config = json.load(f)
+                self.defectDojoParams.host = 'http://192.168.241.129:8000'
+                self.defectDojoParams.api_key = '5de86e2ee9d78f16de3b1b8029c1dff903453a46'
+                self.defectDojoParams.user = 'root'
+                self.defectDojoParams.user_id = 1
+                self.status = "SUCCEED"
+        except:
+
+            self.status = "FAILED"
+
+
+    def getDefectDojoParams(self):
+        return self.defectDojoParams
 
 
 
