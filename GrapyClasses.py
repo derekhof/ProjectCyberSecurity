@@ -204,8 +204,11 @@ class IniConfig:
 
 
     def showKeywords(self):
-        for keyword in self.keywords:
-            print("|" + keyword + "|")
+        if len(self.keywords) > 0:
+            for keyword in self.keywords:
+                print("|" + keyword + "|")
+        else:
+            print("No keywords registered")
 
 
     def showURL(self):
