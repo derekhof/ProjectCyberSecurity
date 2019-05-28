@@ -26,8 +26,7 @@ try:
         crawlerResult = None
         exit(1)
 except:
-    exit(1)
-
+    pass
 
     ## Main menu Grappy
     def print_menu():  ## Your menu design here
