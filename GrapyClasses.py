@@ -339,9 +339,7 @@ class CrawlerResult:
 
     def writeToFileExchange(self, url):
         try:
-            print('test')
             filePathNameWExt = "findings/" + re.sub("[.:/(\W*(http)\W*||\W*(https)\W]", "", url) + str(strftime("-%Y%m%d%H%M")) + ".json"
-
             print(filePathNameWExt)
             with open(filePathNameWExt, 'w') as fp:
                 json.dump(self.json, fp)

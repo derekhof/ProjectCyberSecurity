@@ -8,6 +8,7 @@ import sys
 # Get init config
 initConfig = IniConfig()
 crawler_findings = []
+loop = True
 
 if(initConfig.status != "FAILED"):
 
@@ -24,7 +25,7 @@ try:
         crawlerResult.writeToFileExchange(initConfig.url)
     # delete results
         crawlerResult = None
-        exit(1)
+        loop = False
 except:
     pass
 
@@ -46,8 +47,6 @@ except:
         print("\033[31m" + "10.Exit\n")
         print(67 * "\033[31m-")
 
-
-    loop = True
 
     while loop:  ## While loop which will keep going until loop = False
         print_menu()  ## Displays menu
@@ -96,4 +95,5 @@ except:
             input("Wrong option selection. Enter any key to try again..")
 
 else:
-     print("Error during retrieving config file")
+     if (loop == True):
+         print("Error during retrieving config file")
