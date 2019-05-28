@@ -52,3 +52,4 @@ The following primary requirements were agreed upon.
 -	The user must be able to select the correct result for uploading to DefectDojo
 -	The user must be able to upload the results to DefectDojo
 
+![architecture](https://github.com/derekhof/ProjectCyberSecurity/blob/master/Software%20architecture.jpg)
