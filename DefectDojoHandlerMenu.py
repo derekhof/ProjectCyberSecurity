@@ -1,4 +1,4 @@
-from  DefectDojoClasses import *
+from DefectDojoClasses import *
 from pyfiglet import Figlet
 
 # Set connection params for Deject Dojo (temp -> function for reading it from config file)

@@ -36,13 +36,13 @@ class IniConfig:
 
         self. defectDojoParams = DefectDojoParams()
         try:
-            # read config file
-            with open('config.json', 'r') as f:
-                self.defectDojoParams.config = json.load(f)
-                self.defectDojoParams.host = 'http://192.168.241.129:8000'
-                self.defectDojoParams.api_key = '5de86e2ee9d78f16de3b1b8029c1dff903453a46'
-                self.defectDojoParams.user = 'root'
-                self.defectDojoParams.user_id = 1
+            # read server_config file
+            with open('server_config.json', 'r') as f:
+                self.server_config = json.load(f)
+                self.defectDojoParams.host = self.server_config["HOST"]
+                self.defectDojoParams.api_key = self.server_config["API_KEY"]
+                self.defectDojoParams.user = self.server_config["USER"]
+                self.defectDojoParams.user_id = self.server_config["ID"]
                 self.status = "SUCCEED"
         except:
 

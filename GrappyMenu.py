@@ -10,6 +10,7 @@ initConfig = IniConfig()
 crawler_findings = []
 loop = True
 
+
 if(initConfig.status != "FAILED"):
 
     # initialize SinglePageScraper variables

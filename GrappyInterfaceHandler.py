@@ -8,7 +8,7 @@ import os
 headers = {'content-type': 'application/json', 'Authorization': 'ApiKey root:dac380125620a500f5a32fb2941e94f820693c63'}
 
 # This is the URL to which we're going to send the HTTP POST
-url = 'http://192.168.241.128:8000/api/v1/findings/'
+url = 'http://192.168.207.142:8000/api/v1/findings/'
 # Setup DefectDojo connection information
 
 host = 'http://localhost:8000'
