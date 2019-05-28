@@ -317,8 +317,11 @@ class CrawlerResult:
         self.date_time = datetime.datetime.now()
 
 
-    def defineTestName(self):
-        self.test_name = input("Name of the test = ?")
+    def defineTestName(self, testname=None):
+        if (testname == None):
+            self.test_name = input("Name of the test = ?")
+        else:
+            self.test_name = testname
 
 
     def createReport(self, findings):

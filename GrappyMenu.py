@@ -20,9 +20,12 @@ if(initConfig.status != "FAILED"):
 try:
     if (sys.argv[1] == 'auto'):
         crawler_findings = crawler.runCrawler(initConfig.url, initConfig)
-        crawlerResult.defineTestName()
+        crawlerResult.defineTestName('autoCrawlerResults')
         crawlerResult.createReport(crawler_findings)
-        crawlerResult.writeToFileExchange(initConfig.url)
+        try:
+            crawlerResult.writeToFileExchange(initConfig.url)
+        except FutureWarning:
+            print('Nothing to see here')
     # delete results
         crawlerResult = None
         loop = False
