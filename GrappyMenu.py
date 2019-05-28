@@ -37,17 +37,17 @@ except:
 
         f = Figlet(font='isometric2')
         print(f.renderText('Grappy'))
+        print("Current url: ", initConfig.url)
         print(30 * "-", "MENU", 30 * "-")
         print("\033[31m" + "1. Set URL")
-        print("\033[31m" + "2. Show URL")
-        print("\033[31m" + "3. Show keywords")
-        print("\033[31m" + "4. Add a new keyword")
-        print("\033[31m" + "5. Delete keyword")
-        print("\033[31m" + "6. Run SinglePageScraper")
-        print("\033[31m" + "7. Export singlePageScraper finding")
-        print("\033[31m" + "8. Run Crawler")
-        print("\033[31m" + "9. Export crawler findings")
-        print("\033[31m" + "10.Exit\n")
+        print("\033[31m" + "2. Show keywords")
+        print("\033[31m" + "3. Add a new keyword")
+        print("\033[31m" + "4. Delete keyword")
+        print("\033[31m" + "5. Run SinglePageScraper")
+        print("\033[31m" + "6. Export singlePageScraper finding")
+        print("\033[31m" + "7. Run Crawler")
+        print("\033[31m" + "8. Export crawler findings")
+        print("\033[31m" + "9 .Exit\n")
         print(67 * "\033[31m-")
 
 
@@ -58,27 +58,25 @@ except:
         if choice == 1:
             initConfig.setUrl()
         elif choice == 2:
-            initConfig.showURL()
-        elif choice == 3:
             initConfig.showKeywords()
-        elif choice == 4:
+        elif choice == 3:
             initConfig.addKeyword()
-        elif choice == 5:
+        elif choice == 4:
             initConfig.showKeywords()
             print(" ")
             initConfig.deleteKeyword()
-        elif choice == 6:
+        elif choice == 5:
             singlePageScraperFinding = singePageScraper.runSinglePageScraper(initConfig.url)
-        elif choice == 7:
+        elif choice == 6:
             if singlePageScraperFinding == None:
                 print("There a no findings to export, first run the SinglePageScraper")
             else:
                 singePageScraper.writeToFileExchange(initConfig.exchange_path, initConfig.exchange_name, singlePageScraperFinding)
                 # delete finding after export
                 singlePageScraperFinding = None
-        elif choice == 8:
+        elif choice == 7:
             crawler_findings = crawler.runCrawler(initConfig.url, initConfig)
-        elif choice == 9:
+        elif choice == 8:
 
             if crawlerResult == None:
                 print("There a no findings to export, first run the Crawler")
@@ -89,7 +87,7 @@ except:
                 # delete results
                 crawlerResult = None
 
-        elif choice == 10:
+        elif choice == 9:
             print ("So long, and thanks for the fish!")
             ## You can add your code or functions here
             loop = False  # This will make the while loop to end as not value of loop is set to False
