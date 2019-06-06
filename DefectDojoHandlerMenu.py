@@ -110,13 +110,15 @@ def print_menu(step):  ## Your menu design here
     print(67 * "-")
 
 
+# Auto run function
+loop = True
 argument = True
 if argument == False:
     # init loop state
-    loop = True
-else:
-    exportTestResults("findings/dwgnl-201905271840.json")
     loop = False
+    exportTestResults("findings/dwgnl-201905271840.json")
+
+
 
 
 
