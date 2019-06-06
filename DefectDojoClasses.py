@@ -133,9 +133,9 @@ class defectDojoInterface:
         # Create Test
         user_id = 1
 
-        test_type = 30  # Web Test
+        connection_params.test_type = 30  # Web Test
         environment = 3  # Production environment
-        test = self.dd.create_test(self.engagament_id, test_type, environment,
+        test = self.dd.create_test(self.engagament_id, connection_params.test_type, environment,
                               testResult.datetime, testResult.datetime)
         test_id = test.id()
 
