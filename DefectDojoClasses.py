@@ -13,6 +13,8 @@ class DefectDojoParams:
         self.api_key = None
         self.user = None
         self.user_id = None
+        self.environment = None
+        self.test_type = None
         self.dd = None
 
 class dejectDojoTestResult:
@@ -42,7 +44,9 @@ class IniConfig:
                 self.defectDojoParams.host = self.server_config["HOST"]
                 self.defectDojoParams.api_key = self.server_config["API_KEY"]
                 self.defectDojoParams.user = self.server_config["USER"]
-                self.defectDojoParams.user_id = self.server_config["ID"]
+                self.defectDojoParams.user_id = self.server_config["USER_ID"]
+                self.defectDojoParams.environment = self.server_config["ENVIRONMENT"]
+                self.defectDojoParams.test_type = self.server_config["TEST_TYPE"]
                 self.status = "SUCCEED"
         except:
 
@@ -123,7 +127,7 @@ class defectDojoInterface:
         json_str = json.loads(product.data_json())
         return json_str["name"]
 
-    def exportToDefectDojo(self, testResult):
+    def exportToDefectDojo(self, testResult, connection_params):
         print(testResult.name)
 
         # Create Test
@@ -141,9 +145,6 @@ class defectDojoInterface:
             print(finding)
 
             self.dd.create_finding(str(finding["FINDING"]), str(finding["KEYWORDS"]), "Low", 1, "2019-05-16",self.product_id, self.engagament_id, test_id, user_id, "duwnwuwef", "wfefe", "No", "uhdwue")
-
-
-
 
 
 
@@ -175,7 +176,6 @@ class grappyCrawlerInterface:
                 self.status = True
 
             self.testResult.importJson(test_result_json)
-
 
         except:
             self.status = False

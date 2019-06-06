@@ -76,11 +76,11 @@ def selectAndValidateTestResultID(list_test_result_files):
         print("Only use numbers are allowed")
         return None
 
-def exportTestResults():
+def exportTestResults(path_test_result_json_file):
     ddTestResult = gcInterface.getTestResult(path_test_result_json_file)
 
     if gcInterface.status:
-        ddInterface.exportToDefectDojo(ddTestResult)
+        ddInterface.exportToDefectDojo(ddTestResult, connection_params)
 
 
 
@@ -92,9 +92,9 @@ def print_menu(step):  ## Your menu design here
     print(13 * "-", "DEFECTDOJO IMPORTER CONFIGURATION MENU", 14 * "-")
 
     if step == 1:
-        print("\033[31m" + "1. Initiate connection with Defect Dojo")
+        print("\033[31m" + "1. Initiate connection with DefectDojo")
     elif step == 2:
-        print("\033[31m" + "2. Show existing product")
+        print("\033[31m" + "2. Show existing products")
         print("\033[31m" + "3. Select a product")
     elif step == 3:
         print("\033[31m" + "4. Show engagements")
@@ -109,11 +109,21 @@ def print_menu(step):  ## Your menu design here
     print("\033[31m" + "10.Exit")
     print(67 * "-")
 
-# init loop state
-loop = True
+
+argument = True
+if argument == False:
+    # init loop state
+    loop = True
+else:
+    exportTestResults("findings/dwgnl-201905271840.json")
+    loop = False
+
+
+
+
+
 
 product_id = None
-path_test_result_json_file = None
 engagement_id = None
 step = 1
 
@@ -146,7 +156,7 @@ while loop:  ## While loop which will keep going until loop = False
         if path_test_result_json_file != None:
             step = 5
     elif choice == 8:
-        exportTestResults()
+        exportTestResults(path_test_result_json_file)
     elif choice == 9:
         product_id = None
         engagement_id = None
