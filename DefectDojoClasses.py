@@ -128,23 +128,23 @@ class defectDojoInterface:
         return json_str["name"]
 
     def exportToDefectDojo(self, testResult, connection_params):
-        print(testResult.name)
+        print("Name test results: " + testResult.name)
 
         # Create Test
-        user_id = 1
+        user_id = self.params.user_id
 
-        connection_params.test_type = 30  # Web Test
-        environment = 3  # Production environment
-        test = self.dd.create_test(self.engagament_id, connection_params.test_type, environment,
-                              testResult.datetime, testResult.datetime)
+        connection_params.test_type = self.params.test_type  # Web Test
+        environment = self.params.environment  # Production environment
+        test = self.dd.create_test(self.engagament_id, connection_params.test_type, environment, testResult.datetime, testResult.datetime)
         test_id = test.id()
+        #print(user_id + connection_params.test_type + environment)
 
-        print("test id: " + str(test_id))
+        print("Test id: " + str(test_id))
 
         for finding in testResult.findings:
             print(finding)
 
-            self.dd.create_finding(str(finding["FINDING"]), str(finding["KEYWORDS"]), "Low", 1, "2019-05-16",self.product_id, self.engagament_id, test_id, user_id, "duwnwuwef", "wfefe", "No", "uhdwue")
+            self.dd.create_finding(str(finding["FINDING"]), str(finding["KEYWORDS"]), "Low", 1, "20-06-2019", self.product_id, self.engagament_id, test_id, user_id, "duwnwuwef", "wfefe", "No", "uhdwue")
 
 
 
@@ -180,7 +180,7 @@ class grappyCrawlerInterface:
         except:
             self.status = False
 
-        return  self.testResult
+        return self.testResult
 
 
 

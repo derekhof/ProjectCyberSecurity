@@ -1,8 +1,9 @@
 {
-  "HOST": "http://192.168.241.129:8000",
-  "API_KEY": "5de86e2ee9d78f16de3b1b8029c1dff903453a46",
+  "HOST": "http://192.168.207.142:8000",
+  "API_KEY": "dac380125620a500f5a32fb2941e94f820693c63",
   "USER": "root",
   "USER_ID": 1,
-  "TEST_TYPE": 30,
-  "ENVIRONMMENT": 3
+  "ENVIRONMENT": 3,
+  "TEST_TYPE": 30
+
 }
