@@ -1,8 +1,5 @@
 # import the package
 import defectdojo
-import datetime
-
-import random
 import json
 import os
 
@@ -15,6 +12,8 @@ class DefectDojoParams:
         self.user_id = None
         self.environment = None
         self.test_type = None
+        self.engagement_id = None
+        self.product_id = None
         self.dd = None
 
 class dejectDojoTestResult:
@@ -47,6 +46,8 @@ class IniConfig:
                 self.defectDojoParams.user_id = self.server_config["USER_ID"]
                 self.defectDojoParams.environment = self.server_config["ENVIRONMENT"]
                 self.defectDojoParams.test_type = self.server_config["TEST_TYPE"]
+                self.defectDojoParams.engagement_id = self.server_config["ENGAGEMENT_ID"]
+                self.defectDojoParams.product_id = self.server_config["PRODUCT_ID"]
                 self.status = "SUCCEED"
         except:
 
@@ -62,8 +63,7 @@ class defectDojoInterface:
 
     def __init__(self, connection_params):
         self.params = connection_params
-        self.product_id = None
-        self.engagament_id = None
+
 
     # This function initiates a connection with the defect dojo engine based on the params
     def setupConnection(self):
@@ -91,7 +91,7 @@ class defectDojoInterface:
          if product.message == "Object id does not exist.":
              return False
 
-         self.product_id = product_id
+         self.params.product_id = product_id
 
 
          return True
@@ -115,9 +115,9 @@ class defectDojoInterface:
          if engagement.message == "Object id does not exist.":
              return False
 
-         self.engagament_id = engagement_id
+         self.params.engagament_id = engagement_id
 
-         print(self.engagament_id)
+         print(self.params.engagament_id)
 
          return True
 
@@ -127,27 +127,19 @@ class defectDojoInterface:
         json_str = json.loads(product.data_json())
         return json_str["name"]
 
-    def exportToDefectDojo(self, testResult, connection_params):
+    def exportToDefectDojo(self, testResult):
+
         print("Name test results: " + testResult.name)
 
-        # Create Test
-        user_id = self.params.user_id
-
-        connection_params.test_type = self.params.test_type  # Web Test
-        environment = self.params.environment  # Production environment
-        test = self.dd.create_test(self.engagament_id, connection_params.test_type, environment, testResult.datetime, testResult.datetime)
+        test = self.dd.create_test(self.params.engagement_id, self.params.test_type, self.params.environment, testResult.datetime, testResult.datetime)
         test_id = test.id()
-        #print(user_id + connection_params.test_type + environment)
 
         print("Test id: " + str(test_id))
 
         for finding in testResult.findings:
             print(finding)
 
-            self.dd.create_finding(str(finding["FINDING"]), str(finding["KEYWORDS"]), "Low", 1, "20-06-2019", self.product_id, self.engagament_id, test_id, user_id, "duwnwuwef", "wfefe", "No", "uhdwue")
-
-
-
+            self.dd.create_finding(str(finding["FINDING"]), str(finding["KEYWORDS"]), "Low", 1, "2019-05-27", self.params.product_id, self.params.engagement_id, test_id, self.params.user_id, "duwnwuwef", "wfefe", "No", "uhdwue")
 
 
 class grappyCrawlerInterface:

@@ -1,9 +1,11 @@
 {
-  "HOST": "http://192.168.207.142:8000",
-  "API_KEY": "dac380125620a500f5a32fb2941e94f820693c63",
+  "HOST": "http://192.168.241.128:8000",
+  "API_KEY": "f73f823e37d760ffdcc902d624fa6a52519487d1",
   "USER": "root",
   "USER_ID": 1,
   "ENVIRONMENT": 3,
-  "TEST_TYPE": 30
+  "TEST_TYPE": 30,
+  "PRODUCT_ID": 1,
+  "ENGAGEMENT_ID": 1
 
 }

@@ -77,50 +77,13 @@ def selectAndValidateTestResultID(list_test_result_files):
         print("Only use numbers are allowed")
         return None
 
-def AutoSelectAndValidatePoductID():
-
-    try:
-        product_id = 1
-        if ddInterface.checkProductID(product_id):
-            print("Selected product: " + ddInterface.getProductName(product_id))
-            return product_id
-        else:
-            print("Product ID does not exist")
-            return None
-    except:
-        print("Only use numbers are allowed")
-        return None
-
-def AutoSelectAndValidateEngagementID():
-    try:
-        engagement_id = 4
-        if ddInterface.checkEngagementID(engagement_id):
-            print("Selected engagement: " + ddInterface.getEngagementName(engagement_id))
-            return engagement_id
-        else:
-            print("Engagement ID does not exist")
-            return None
-    except:
-        print("Only use numbers are allowed")
-        return None
-
-def AutoSelectAndValidateTestResultID(list_test_result_files):
-    try:
-        test_result_id = 1
-        if test_result_id <= len(list_test_result_files):
-            return list_test_result_files[test_result_id]
-        else:
-            print("Test result ID does not exist")
-            return None
-    except:
-        print("Only use numbers are allowed")
-        return None
 
 def exportTestResults(path_test_result_json_file):
     ddTestResult = gcInterface.getTestResult(path_test_result_json_file)
 
     if gcInterface.status:
-        ddInterface.exportToDefectDojo(ddTestResult, connection_params)
+
+        ddInterface.exportToDefectDojo(ddTestResult)
 
 
 
@@ -161,28 +124,18 @@ def print_menu(step):  ## Your menu design here
 
 
 loop = True
+
 try:
     if (sys.argv[1] == 'auto'):
+
+        print("dfwefwe")
         ddInterface.setupConnection()
         loop = False
-        if(init_config.status != "FAILED"):
-            print("Connection: " + init_config.status)
-            try:
-                product_id = AutoSelectAndValidatePoductID()
-                engagement_id = AutoSelectAndValidateEngagementID()
-                path_test_result_json_file = AutoSelectAndValidateTestResultID(gcInterface.getExistingCrawlerResults())
-                if path_test_result_json_file == None:
-                    print("Cant find path to json file")
-                else:
-                    exportTestResults(path_test_result_json_file)
-            except FutureWarning:
-                print('Nothing to see here')
-            # delete results
-            path_test_result_json_file = None
-            loop = False
-
+        exportTestResults(sys.argv[2])
 except:
     pass
+
+
 
 
 
