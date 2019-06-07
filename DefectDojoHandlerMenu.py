@@ -113,16 +113,6 @@ def print_menu(step):  ## Your menu design here
     print(67 * "-")
 
 
-# # Auto run function
-# loop = True
-# argument = True
-# if argument == False:
-#     # init loop state
-#     loop = False
-#     ddInterface.setupConnection()
-#     exportTestResults("findings/dwgnl-201905271840.json")
-
-
 loop = True
 
 try:
@@ -134,9 +124,6 @@ try:
         exportTestResults(sys.argv[2])
 except:
     pass
-
-
-
 
 
 product_id = None

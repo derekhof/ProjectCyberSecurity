@@ -116,7 +116,6 @@ class defectDojoInterface:
              return False
 
          self.params.engagament_id = engagement_id
-
          print(self.params.engagament_id)
 
          return True
@@ -138,8 +137,10 @@ class defectDojoInterface:
 
         for finding in testResult.findings:
             print(finding)
-
-            self.dd.create_finding(str(finding["FINDING"]), str(finding["KEYWORDS"]), "Low", 1, "2019-05-27", self.params.product_id, self.params.engagement_id, test_id, self.params.user_id, "duwnwuwef", "wfefe", "No", "uhdwue")
+            date_format = str(finding["DATETIME"])
+            name = "Positive matches at the url: " + str(finding["FINDING"])
+            desc = "There are positive matches with the following keyword(s): " + str(finding["KEYWORDS"])
+            self.dd.create_finding(name, desc, "Low", 1, date_format[:10], self.params.product_id, self.params.engagement_id, test_id, self.params.user_id, "To be determined", "", "", "To be determined")
 
 
 class grappyCrawlerInterface:
